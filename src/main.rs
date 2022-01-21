@@ -6,19 +6,15 @@ use tui::Terminal;
 
 #[derive(Copy, Clone, Debug)]
 enum MenuItem {
-    History,
-    Status,
-    Branches,
-    Stashes,
+    Dashboard,
+    Commits,
 }
 
 impl From<MenuItem> for usize {
     fn from(input: MenuItem) -> usize {
         match input {
-            MenuItem::History => 0,
-            MenuItem::Status => 1,
-            MenuItem::Branches => 2,
-            MenuItem::Stashes => 3,
+            MenuItem::Dashboard => 0,
+            MenuItem::Commits => 1,
         }
     }
 }
@@ -29,7 +25,7 @@ fn main() -> Result<(), io::Error> {
     let mut terminal = Terminal::new(backend)?;
 
     terminal.draw(|f| {
-        let tab_titles = vec!["History", "Status", "Branches", "Stashes"];
+        let tab_titles = vec!["Dashboard", "Stashes"];
         let mut active_tab_item = MenuItem::History;
         let chunks = Layout::default()
             .direction(Direction::Vertical)
